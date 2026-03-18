@@ -1,0 +1,119 @@
+# frontend-craft-codex
+
+[![Stars](https://img.shields.io/github/stars/bovinphang/frontend-craft-codex?style=flat)](https://github.com/bovinphang/frontend-craft-codex/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=black)
+![Vue](https://img.shields.io/badge/-Vue-4FC08D?logo=vue.js&logoColor=white)
+![Figma](https://img.shields.io/badge/-Figma-F24E1E?logo=figma&logoColor=white)
+![Node](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white)
+
+---
+
+<div align="center">
+
+**🌐 Language / 语言 / 語言 / 言語 / 한국어**
+
+[**English**](../../README.md) | [简体中文](../../README.zh-CN.md) | [繁體中文](README.md) | [日本語](../ja-JP/README.md) | [한국어](../ko-KR/README.md)
+
+</div>
+
+---
+
+**面向企業前端團隊的 Codex 插件。**
+
+整合程式碼審查、安全審查、設計稿轉程式碼（Figma/Sketch/MasterGo/Pixso/墨刀/摹客）、無障礙檢查、自動化品質保障與專案範本。所有審查、分析與評估報告均自動儲存為 Markdown 檔案至專案 `reports/` 目錄，便於歸檔、追溯與團隊共享。
+
+---
+
+## 🚀 快速開始
+
+### 第一步：安裝插件
+
+**方式一：專案級安裝（建議）**
+
+```bash
+git submodule add https://github.com/bovinphang/frontend-craft-codex.git .frontend-craft
+cp -r .frontend-craft/.agents .frontend-craft/.codex .
+```
+
+**方式二：使用者級安裝**
+
+```bash
+git clone https://github.com/bovinphang/frontend-craft-codex.git .frontend-craft
+cp -r .frontend-craft/.agents/skills/* ~/.agents/skills/
+cp -r .frontend-craft/.codex/agents/* ~/.codex/agents/
+```
+
+### 第二步：初始化專案設定（建議）
+
+呼叫 `$frontend-craft-init` skill 或直接詢問 Codex：
+
+```
+請使用 frontend-craft-init skill 將專案範本初始化至 .codex/
+```
+
+### 第三步：開始使用
+
+```
+# 程式碼審查
+使用 frontend-craft-review 或 frontend-code-review skill
+
+# 建立頁面/功能/元件
+使用 frontend-craft-scaffold skill
+
+# 顯式呼叫子代理
+使用 frontend-architect 分析元件架構
+使用 performance-optimizer 進行效能分析
+```
+
+✨ **完成！** 您現在可使用 5 個自訂子代理、16 個 skills。
+
+---
+
+## 📦 目錄結構
+
+```
+frontend-craft-codex/
+├── .agents/skills/     # Codex Skills（16 個）
+├── .codex/agents/     # 自訂子代理（5 個）
+└── scripts/           # 可選手動整合腳本
+```
+
+---
+
+## 📋 功能概覽
+
+### Skills
+
+| Skill | 用途 |
+|-------|------|
+| `frontend-code-review` | 架構、型別、渲染、樣式、無障礙審查 |
+| `frontend-craft-review` | 審查指定檔案或最近 Git 變更 |
+| `frontend-craft-init` | 初始化專案範本 |
+| `frontend-craft-scaffold` | 建立 page/feature/component |
+| `security-review` | 安全審查 |
+| `accessibility-check` | 無障礙檢查 |
+| `implement-from-design` | 設計稿實作 |
+| `test-and-fix` | 校驗與修復 |
+| 等 | ... |
+
+### 自訂子代理
+
+| Agent | 用途 |
+|-------|------|
+| `frontend-architect` | 架構設計 |
+| `performance-optimizer` | 效能優化 |
+| `ui-checker` | UI 還原度檢查 |
+| `figma-implementer` | 設計稿實作 |
+| `design-token-mapper` | Token 對應 |
+
+---
+
+## 📄 授權條款
+
+MIT - 自由使用、依需求修改，歡迎回饋。
+
+---
+
+**若本倉庫對您有幫助，請給予 Star。** 完整文件請參閱 [English](../../README.md) 或 [简体中文](../../README.zh-CN.md)。

@@ -1,0 +1,8 @@
+# Force LF line endings for scripts and configs
+# Prevents CRLF issues on Windows that break hook execution
+*.sh text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+hooks/** text eol=lf
+scripts/** text eol=lf
