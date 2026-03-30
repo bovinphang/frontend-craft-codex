@@ -30,6 +30,7 @@ description: 将 frontend-craft 的项目模板（AGENTS.md、config.toml、rule
    - `templates/rules/state-management.md` → `.codex/rules/state-management.md`
    - `templates/rules/error-handling.md` → `.codex/rules/error-handling.md`
    - `templates/rules/naming-conventions.md` → `.codex/rules/naming-conventions.md`
+   - `templates/rules/code-comments.md` → `.codex/rules/code-comments.md`
    - `templates/rules/ci-cd.md` → `.codex/rules/ci-cd.md`
    - `templates/rules/refactoring.md` → `.codex/rules/refactoring.md`
 
@@ -38,7 +39,7 @@ description: 将 frontend-craft 的项目模板（AGENTS.md、config.toml、rule
 5. 复制完成后，提醒用户：
    - 根据项目实际技术栈修改 `AGENTS.md` 中的项目基础信息和常用命令
    - 删除项目不使用的规则（如纯 React 项目删除 `vue.md`，不需要 i18n 的项目删除 `i18n.md`）
-   - 根据项目实际情况修改 `rules/react.md` 或 `rules/vue.md` 中的技术栈配置
+   - 根据项目实际情况修改 `.codex/rules/react.md` 或 `.codex/rules/vue.md` 中的技术栈配置；填写或更新 `package.json`、文档化依赖版本时，遵循其中「版本与依赖」条目（彼此兼容的主流稳定版本，对齐官方文档、脚手架默认值或包管理器推荐）
    - 检查 `.codex/config.toml` 中的 MCP 配置是否符合项目需求
 
 6. 输出初始化完成的确认信息和文件清单。

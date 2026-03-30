@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `code-comments.md` 规则模板（前端代码注释规范），已纳入 `frontend-craft-init` 复制清单与 `AGENTS.md` 规则索引
+
 ## [2.0.0] - 2025-03-18
 
 ### Added

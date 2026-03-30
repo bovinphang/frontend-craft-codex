@@ -10,6 +10,7 @@
 - 样式: Tailwind CSS + CSS Modules
 - 状态管理: Zustand / Redux Toolkit / Jotai（按项目实际选择）
 - UI 组件库: 按项目实际选择（如 Ant Design、Material UI 或内部 Design System）
+- 版本与依赖：新建模块、补充 `package.json` 或更新本节前，优先采用彼此兼容的主流稳定版本（对齐官方文档、脚手架默认值或包管理器推荐），避免混用已停止维护或与仓库主线 major 不匹配的依赖。
 
 ## React 组件规范
 
@@ -46,7 +47,7 @@
 - `Component.tsx`
 - `Component.types.ts`
 - `hooks/useComponentLogic.ts`
-- `Component.module.css`
+- `ComponentName.styles.css`（普通 CSS / CSS Modules；使用 styled-components 时为 `ComponentName.styles.ts`）
 - 如果仓库采用就近测试，则补充测试文件，如：`__tests__/Component.spec.tsx`
 
 ## React 反模式

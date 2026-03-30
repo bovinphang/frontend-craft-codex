@@ -97,5 +97,6 @@
 - state-management.md - 状态管理
 - error-handling.md - 错误处理
 - naming-conventions.md - 命名规范
+- code-comments.md - 代码注释（何时写、写什么）
 - ci-cd.md - CI/CD 规范
 - refactoring.md - 重构约束

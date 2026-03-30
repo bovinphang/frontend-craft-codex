@@ -71,6 +71,39 @@ performance-optimizer でパフォーマンス分析
 
 ---
 
+## 🌐 マルチエージェント向けスキル（Skills CLI）
+
+**Claude Code**、**OpenAI Codex**、**Cursor**、**OpenCode**、**Gemini CLI**、**OpenClaw**、**Continue**、**CodeBuddy**、**Trae**、**Kimi Code CLI** など複数の AI コーディングエージェントを使う場合、[Skills CLI](https://skills.sh/docs/cli)（`npx skills`）で正規のスキル源リポジトリ [`bovinphang/frontend-craft`](https://github.com/bovinphang/frontend-craft) から**ワークフロースキル**を各ツールのスキルディレクトリにインストールできます。CLI は数十種類のエージェントに対応します。一覧は対話プロンプトまたは公式ドキュメントを参照してください。
+
+**Skills CLI と本 Codex リポジトリの違い**
+
+- **Skills CLI** — `bovinphang/frontend-craft` からスキルパッケージを、選択したエージェント用のパスに配置します。ツール横断でレビューやフロントエンド規約を揃えたいとき向けです。
+- **本リポジトリ** — **Codex** 向けレイアウト（[`.agents/skills/`](../../.agents/skills/)、[`.codex/agents/`](../../.codex/agents/)、Codex 用の init/review/scaffold など）を、前述の **クイックスタート**（サブモジュールまたはコピー）で提供します。
+
+**要件:** Node.js ≥ 18。
+
+**スキルのインストール**
+
+```bash
+npx skills add bovinphang/frontend-craft
+```
+
+プロジェクト／グローバル（`-g`）、シンボリックリンク／コピー（`--copy`）、対象エージェントなどはプロンプトに従って選択します。インストールせずリポジトリ内のスキル一覧だけ見る場合は `npx skills add bovinphang/frontend-craft -l` を使います。特定のスキルやエージェントだけ入れる場合は `--skill` / `--agent`（`npx skills --help` 参照）。
+
+**スキルの更新**
+
+スキルをインストールしたプロジェクトのディレクトリで（グローバル導入の場合はそのスコープで）実行します。
+
+```bash
+npx skills update
+```
+
+インストール済みスキルを最新版に更新します。事前に `npx skills check` で更新の有無を確認できます。
+
+**テレメトリ:** CLI は既定で匿名テレメトリを収集する場合があります。無効化するには環境変数 `DISABLE_TELEMETRY=1` を設定してください。詳細は [skills.sh CLI ドキュメント](https://skills.sh/docs/cli) を参照してください。
+
+---
+
 ## 📦 ディレクトリ構造
 
 ```

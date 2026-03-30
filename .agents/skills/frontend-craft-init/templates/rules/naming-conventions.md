@@ -14,7 +14,7 @@
 | 类型文件 | camelCase | `types.ts`、`models.ts` |
 | 常量文件 | camelCase | `constants.ts`、`config.ts` |
 | 测试文件 | 与源文件同名 + `.spec` / `.test` | `Button.spec.tsx`、`useAuth.spec.ts` |
-| 样式文件 | 与组件同名 | `Button.module.css`、`DataTable.module.scss` |
+| 样式文件 | 组件名 + `.styles` + 扩展名 | `Button.styles.css`、`DataTable.styles.scss`；使用 styled-components 时为 `ComponentName.styles.ts` |
 | 语言包 | 语言代码（BCP 47） | `zh-CN.json`、`en-US.json` |
 | 目录名 | PascalCase（组件/页面）或 kebab-case（功能模块） | `UserDetail/`、`auth/`、`order/` |
 

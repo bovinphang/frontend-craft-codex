@@ -82,6 +82,39 @@ cp -r .frontend-craft/.codex/agents/* ~/.codex/agents/
 
 ---
 
+## 🌐 多代理技能安装（Skills CLI）
+
+若团队同时使用 **Claude Code**、**OpenAI Codex**、**Cursor**、**OpenCode**、**Gemini CLI**、**OpenClaw**、**Continue**、**CodeBuddy**、**Trae**、**Kimi Code CLI** 等多种 AI 编程代理，可通过 [Skills CLI](https://skills.sh/docs/cli)（`npx skills`）将规范技能源仓库 [`bovinphang/frontend-craft`](https://github.com/bovinphang/frontend-craft) 中的**工作流技能**安装到各工具约定的技能目录。CLI 支持数十种代理；完整列表以交互提示或上游文档为准。
+
+**Skills CLI 与本 Codex 仓库的区别**
+
+- **Skills CLI** — 从 `bovinphang/frontend-craft` 安装技能包到所选代理的目录，便于在多种工具间统一评审与前端规范。
+- **本仓库** — 提供 **Codex** 目录布局（[`.agents/skills/`](.agents/skills/)、[`.codex/agents/`](.codex/agents/)，以及面向 Codex 的 init/review/scaffold 等技能），通过上文 **快速开始** 的子模块或复制方式使用。
+
+**环境要求：** Node.js ≥ 18。
+
+**安装技能**
+
+```bash
+npx skills add bovinphang/frontend-craft
+```
+
+按提示选择项目级或全局安装（`-g`）、符号链接或复制（`--copy`），以及要启用的代理。若只想查看仓库内技能列表而不安装，可执行 `npx skills add bovinphang/frontend-craft -l`。若需指定技能名或代理，可使用 `--skill` / `--agent`（详见 `npx skills --help`）。
+
+**更新技能**
+
+在已安装技能的项目目录下执行（若为全局安装，请使用对应作用域）：
+
+```bash
+npx skills update
+```
+
+该命令会将已安装的技能更新到最新版本。也可先运行 `npx skills check` 查看可用更新。
+
+**遥测：** CLI 默认可能采集匿名遥测。若需关闭，请设置环境变量 `DISABLE_TELEMETRY=1`。说明见 [skills.sh CLI 文档](https://skills.sh/docs/cli)。
+
+---
+
 ## 📦 目录结构
 
 ```
@@ -177,6 +210,7 @@ frontend-craft-codex/
 | `.codex/rules/state-management.md` | 状态管理 |
 | `.codex/rules/error-handling.md` | 错误处理 |
 | `.codex/rules/naming-conventions.md` | 命名规范 |
+| `.codex/rules/code-comments.md` | 前端代码注释规范 |
 | `.codex/rules/ci-cd.md` | CI/CD 流水线 |
 | `.codex/rules/refactoring.md` | 重构约束 |
 

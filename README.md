@@ -82,6 +82,39 @@ Use performance-optimizer for performance analysis
 
 ---
 
+## 🌐 Multi-agent skills (Skills CLI)
+
+If your team uses **Claude Code**, **OpenAI Codex**, **Cursor**, **OpenCode**, **Gemini CLI**, **OpenClaw**, **Continue**, **CodeBuddy**, **Trae**, **Kimi Code CLI**, or other AI coding agents, you can install the **workflow skills** from the canonical [`bovinphang/frontend-craft`](https://github.com/bovinphang/frontend-craft) repository into each tool’s skills directory using the [Skills CLI](https://skills.sh/docs/cli) (`npx skills`). The CLI supports dozens of agents; the exact list appears in interactive prompts or in the upstream documentation.
+
+**Skills CLI vs. this Codex repo**
+
+- **Skills CLI** — Installs skill packages from `bovinphang/frontend-craft` into the paths your chosen agents expect. Use this when you want the same review and frontend standards across multiple tools.
+- **This repository** — Provides the **Codex** layout ([`.agents/skills/`](.agents/skills/), [`.codex/agents/`](.codex/agents/), Codex-specific init/review/scaffold skills, etc.) via the **Quick Start** steps above (submodule or copy).
+
+**Requirements:** Node.js ≥ 18.
+
+**Install skills**
+
+```bash
+npx skills add bovinphang/frontend-craft
+```
+
+Follow the prompts for project vs. global install (`-g`), symlink vs. copy (`--copy`), and which agents to enable. To list skills in the repo without installing, run `npx skills add bovinphang/frontend-craft -l`. For specific skills or agents, use `--skill` / `--agent` (see `npx skills --help`).
+
+**Update skills**
+
+From the project where skills were installed (or after a global install, use the matching scope):
+
+```bash
+npx skills update
+```
+
+This updates all installed skills to their latest versions. You can run `npx skills check` first to see what would change.
+
+**Telemetry:** The CLI may collect anonymous telemetry by default. To disable it, set `DISABLE_TELEMETRY=1`. Details: [skills.sh CLI docs](https://skills.sh/docs/cli).
+
+---
+
 ## 📦 What's inside
 
 ```
@@ -177,6 +210,7 @@ Use frontend-architect to analyze the component architecture for this page
 | `.codex/rules/state-management.md` | State management |
 | `.codex/rules/error-handling.md` | Error handling |
 | `.codex/rules/naming-conventions.md` | Naming conventions |
+| `.codex/rules/code-comments.md` | Frontend code comment guidelines |
 | `.codex/rules/ci-cd.md` | CI/CD pipeline |
 | `.codex/rules/refactoring.md` | Refactoring constraints |
 

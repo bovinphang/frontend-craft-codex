@@ -45,7 +45,7 @@ src/
 ├── components/                 # 全局共享 UI 组件
 │   ├── Button/
 │   │   ├── Button.tsx
-│   │   ├── Button.module.css
+│   │   ├── Button.styles.css
 │   │   └── __tests__/
 │   ├── Modal/
 │   ├── Form/
@@ -133,7 +133,7 @@ src/
 ComponentName/
 ├── ComponentName.tsx
 ├── ComponentName.types.ts       # 类型定义（如需独立）
-├── ComponentName.module.css     # 样式（如需）
+├── ComponentName.styles.css     # 样式（如需；styled-components 时用 ComponentName.styles.ts）
 ├── hooks/
 │   └── useComponentLogic.ts
 ├── components/
@@ -342,6 +342,8 @@ function Dashboard() {
 ## 样式规范
 
 - 与项目现有样式体系保持一致（Tailwind / CSS Modules / styled-components 等）
+- 组件伴生样式文件命名：`ComponentName.styles.css`（或 `.scss` 等）；使用 styled-components 时统一为 `ComponentName.styles.ts`
+- 若采用 CSS Modules 的 `import styles` 写法，需在构建工具中将 `*.styles.css`（及 `.scss` 等）配置为按 CSS Modules 解析
 - 复杂动画或特殊样式使用 CSS Modules 或项目约定方案
 - 禁止内联样式（除动态值外）
 - 响应式处理需与项目断点约定一致

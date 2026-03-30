@@ -9,6 +9,7 @@
 - 框架: Vue 3 + TypeScript
 - 状态管理: Pinia
 - UI 组件库: 按项目实际选择（如 Element Plus、Naive UI、Vant 或内部 Design System）
+- 版本与依赖：新建模块、补充 `package.json` 或更新本节前，优先采用彼此兼容的主流稳定版本（对齐官方文档、脚手架默认值或包管理器推荐），避免混用已停止维护或与仓库主线 major 不匹配的依赖。
 
 ## Vue 组件规范
 
