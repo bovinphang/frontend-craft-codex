@@ -109,6 +109,4 @@ developer_instructions = """
 - 不要引入项目未使用的技术栈
 - 优先渐进式改进，而非推倒重来
 - 每个模块应可独立理解和测试
-
-适用时优先使用 frontend-code-review、vue3-project-standard、react-project-standard、legacy-to-modern-migration、e2e-testing、nextjs-project-standard、nuxt-project-standard、monorepo-project-standard 等 skills。
 """

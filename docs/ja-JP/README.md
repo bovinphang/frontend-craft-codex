@@ -67,7 +67,7 @@ frontend-architect でコンポーネントアーキテクチャを分析
 performance-optimizer でパフォーマンス分析
 ```
 
-✨ **完了！** 5 つのカスタムエージェント、16 の skills が利用可能です。
+✨ **完了！** 9 つのカスタムエージェント、16 の skills が利用可能です。
 
 ---
 
@@ -109,7 +109,7 @@ npx skills update
 ```
 frontend-craft-codex/
 ├── .agents/skills/     # Codex Skills（16 個）
-├── .codex/agents/     # カスタムサブエージェント（5 個）
+├── .codex/agents/     # カスタムサブエージェント（9 個）
 └── scripts/           # オプション：手動統合スクリプト
 ```
 
@@ -140,6 +140,10 @@ frontend-craft-codex/
 | `ui-checker` | UI 忠実度チェック |
 | `figma-implementer` | デザイン実装 |
 | `design-token-mapper` | Token マッピング |
+| `frontend-code-reviewer` | フロントエンドコードレビュー |
+| `frontend-security-reviewer` | ブラウザ側セキュリティレビュー |
+| `frontend-e2e-runner` | E2E / Playwright |
+| `typescript-reviewer` | TypeScript / JavaScript レビュー |
 
 ---
 

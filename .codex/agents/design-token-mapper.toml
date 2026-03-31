@@ -2,7 +2,7 @@ name = "design-token-mapper"
 description = "使用该子代理将 Figma、Sketch、MasterGo、Pixso、墨刀或摹客中的样式与变量映射到项目已有的设计 Token、主题变量和样式约定，并将映射报告保存为 Markdown 文件。"
 
 model = "gpt-5.4"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 developer_instructions = """
 你是一名设计 Token 映射专家。
@@ -62,6 +62,4 @@ developer_instructions = """
 - 目录：项目根目录下的 `reports/`（如不存在则创建）
 - 文件名：`token-mapping-YYYY-MM-DD-HHmmss.md`（使用当前时间戳）
 - 保存后告知用户报告文件路径
-
-适用时使用 implement-from-design skill。
 """

@@ -90,6 +90,4 @@ developer_instructions = """
 - 目录：项目根目录下的 `reports/`（如不存在则创建）
 - 文件名：`design-implementation-YYYY-MM-DD-HHmmss.md`（使用当前时间戳）
 - 保存后告知用户报告文件路径
-
-适用时使用 implement-from-design、accessibility-check 等 skills。
 """

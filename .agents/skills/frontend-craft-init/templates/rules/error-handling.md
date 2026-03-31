@@ -15,30 +15,42 @@
 ### React
 
 ```tsx
-// main.tsx
-window.addEventListener('unhandledrejection', (event) => {
-    reportError(event.reason);
+// main.tsx — 未捕获的 Promise
+window.addEventListener("unhandledrejection", (event) => {
+  reportError(event.reason);
 });
 
-// ErrorBoundary
-class GlobalErrorBoundary extends React.Component {
-    state = { hasError: false };
+// 推荐：react-error-boundary，业务侧保持函数组件 + FallbackComponent
+import { ErrorBoundary } from "react-error-boundary";
 
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-
-    componentDidCatch(error: Error, info: React.ErrorInfo) {
-        reportError(error, { componentStack: info.componentStack });
-    }
-
-    render() {
-        if (this.state.hasError) {
-            return <GlobalErrorFallback onRetry={() => this.setState({ hasError: false })} />;
-        }
-        return this.props.children;
-    }
+function GlobalErrorFallback({
+  error,
+  resetErrorBoundary,
+}: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <div role="alert">
+      <p>页面出现异常</p>
+      <button type="button" onClick={resetErrorBoundary}>
+        重试
+      </button>
+    </div>
+  );
 }
+
+// 根节点包裹示例（root 来自 createRoot(document.getElementById("root")!) 等）
+root.render(
+  <ErrorBoundary
+    FallbackComponent={GlobalErrorFallback}
+    onError={(error, info) => {
+      reportError(error, { componentStack: info.componentStack });
+    }}
+  >
+    <App />
+  </ErrorBoundary>,
+);
 ```
 
 ### Vue

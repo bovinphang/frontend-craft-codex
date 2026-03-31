@@ -1,7 +1,7 @@
 ---
 name: frontend-code-review
 description: 从架构、可维护性、类型安全、可访问性、样式一致性、性能和可测试性等角度审查前端代码，并将报告保存为 Markdown 文件。当用户要求代码审查、Review、评审代码质量时自动激活。
-version: 1.1.0
+version: 1.2.0
 ---
 
 # 前端代码评审
@@ -51,10 +51,11 @@ version: 1.1.0
 
 6. 可维护性
 
-- 文件体积是否合理
+- 组件/页面文件规模是否合理（宜约 **300 行**内；逾 **500 行**或复杂度过高须拆分，见 `templates/rules/react.md` / `vue.md`「组件文件规模」）
 - 命名质量是否良好
 - 是否有应该提取的重复逻辑
 - 是否存在死代码、过期注释或临时性 hack
+- 业务状态、类型、标识是否用裸数字/裸字符串（应对齐 `templates/rules/typescript.md`「禁止 Magic Number / Magic String」）
 
 7. 测试
 
@@ -76,7 +77,7 @@ version: 1.1.0
 
 10. 质量项（建议修改）
 
-- [ ] 组件复杂度合理（单文件 < 300 行）
+- [ ] 组件文件规模符合约定（约 300 行内为佳；逾 500 行或高复杂度已拆子组件 / Hooks / Composables / utils）
 - [ ] 无重复代码（DRY 原则）
 - [ ] 无未使用的 import
 
@@ -120,3 +121,7 @@ version: 1.1.0
 
 要具体且可执行。
 不要只给出"优化性能"这类空泛建议，而不指出具体代码模式。
+
+## 与子代理的配合
+
+需要基于 **git diff**、按 **CRITICAL / HIGH / MEDIUM / LOW** 分级、合并同类问题并输出 **Review Summary 表** 时，可委托插件内置的 **`frontend-code-reviewer`** 子代理；报告文件命名与本 Skill 相同（`code-review-YYYY-MM-DD-HHmmss.md`）。

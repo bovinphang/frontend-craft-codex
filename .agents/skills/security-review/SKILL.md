@@ -1,7 +1,7 @@
 ---
 name: security-review
 description: 前端代码安全审查，检测 XSS、CSRF、敏感数据泄露、不安全的用户输入处理和依赖风险，并将报告保存为 Markdown 文件。当用户要求安全检查、安全审查，或代码涉及用户输入、认证、支付、文件上传等敏感操作时自动激活。
-version: 1.1.0
+version: 1.2.0
 ---
 
 # 前端安全审查
@@ -101,3 +101,7 @@ version: 1.1.0
 - 不要依赖前端校验作为唯一安全防线
 - 不要信任任何来自客户端的数据
 - 发现高危问题时必须标记为阻塞合并
+
+## 与子代理的配合
+
+需要结合 **`npm audit`**、前端向 **OWASP** 逐项排查、**Grep** 高危 DOM/API 模式，并明确与 **`frontend-code-reviewer`** 分工（质量 vs 威胁建模）时，可委托 **`frontend-security-reviewer`** 子代理。报告文件名仍为 `security-review-YYYY-MM-DD-HHmmss.md`，分级格式与本 Skill 保持一致。

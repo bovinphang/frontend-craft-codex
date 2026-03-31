@@ -91,7 +91,7 @@ developer_instructions = """
 """
 ```
 
-3. 在 README 的 Agents 表格中新增一行
+3. 在 README 的 **Agents** 表格中新增一行，并同步 **README.zh-CN.md**、**docs/*/README.md** 中的目录树与子代理数量、表格（如适用）
 
 ## 如何添加 Rule 模板
 

@@ -1,7 +1,7 @@
 ---
 name: react-project-standard
-description: React + TypeScript 项目的完整工程规范，涵盖项目结构、组件设计、Hooks、路由、状态管理、API 层、错误处理、测试和性能优化。当用户在 React 项目中创建、修改组件或模块，涉及架构设计、代码编写时自动激活。
-version: 2.0.0
+description: React + TypeScript 项目的完整工程规范，涵盖项目结构、组件设计、组合与复合组件等 UI 模式、Hooks、路由、状态管理、API 层、错误处理、测试和性能优化。当用户在 React 项目中创建、修改组件或模块，涉及架构设计、代码编写时自动激活。
+version: 2.1.0
 ---
 
 # React 项目规范
@@ -30,6 +30,7 @@ version: 2.0.0
 - 页面 / 模块 / 通用组件边界设计
 - hooks、API 层、状态管理分层设计
 - 为现有 React 项目补齐错误处理、测试、性能优化方案
+- 组合/复合组件、Render Props、Context + Reducer、列表虚拟化、表单与动效等模式选型
 
 ---
 
@@ -108,7 +109,7 @@ src/
 │   │   └── __tests__/
 │   ├── Modal/
 │   ├── Form/
-│   └── ErrorBoundary/
+│   └── ErrorBoundary/          # 对 react-error-boundary 等的薄封装（函数组件）
 │
 ├── hooks/                      # 全局共享 hooks
 │   ├── useAuth.ts
@@ -221,7 +222,8 @@ src/
 
 ## 组件设计规范
 
-- 使用函数组件和 TypeScript
+- 使用**函数组件**、Hooks 与 TypeScript；**不要**新增类组件（Error Boundary 用 `react-error-boundary` 等库，见下文）
+- **单文件规模**与拆分原则见 `templates/rules/react.md`「**组件文件规模**」（约 300 行内为佳，逾 500 行或复杂度过高拆子组件、Hooks、utils、类型）
 - 保持组件职责单一、可组合
 - 将可复用逻辑提取到 hooks
 - 在合适场景优先使用受控组件 API
@@ -230,6 +232,64 @@ src/
 - 保持可访问性与键盘交互
 - 避免过深的 JSX 嵌套和重复分支
 - 对可推导的值不要额外存 state
+
+---
+
+## 常用 UI 与状态模式
+
+以下模式可与本 skill 其他章节（Hooks、状态管理、性能优化、错误处理）对照使用；**按业务复杂度与团队熟悉度选用**，避免为模式而模式。思路参考业界常见的 React 前端模式实践（如组件组合、复合组件、性能与无障碍等）。
+
+### 组合优于继承
+
+- 用**小颗粒子组件** + `children` / 显式 props 拼装界面，而不是在 React 中搭建类继承层次。
+- 示例：`Card` + `CardHeader` + `CardBody`，由使用方组合，而不是一个巨型 `Card` 用大量布尔 props 分支。
+
+### 复合组件（Compound Components）
+
+- 根组件通过 **Context** 向子组件提供内部状态（如当前 Tab、打开/关闭）。
+- 子组件在 `useContext` 为空时**抛错或断言**，明确「必须在 Provider 树内使用」。
+- API 表面保持可读：`<Tabs><TabList><Tab /></TabList></Tabs>`。
+
+### Render Props / 函数子
+
+- 适用：封装**数据获取与三态**（loading / error / data），把**渲染决策**交给父级。
+- 与 **自定义 Hook** 二选一即可：多数场景 `useXxx()` + 普通组件更直观；仅在需要强约束「同层渲染逻辑」时保留 Render Props。
+
+### Context + useReducer
+
+- 适合**中等复杂度、多子树共享**的客户端状态，且更新可归约为明确 `action`。
+- 避免把高频变化的大对象塞进顶层 Context；服务端数据仍优先 **React Query / SWR**。
+- 大型全局业务状态继续用仓库已选的 **Zustand / Redux Toolkit / Jotai**。
+
+### 表单
+
+- 受控字段 + 校验错误对象是一类可行实现；中大型表单优先 **React Hook Form**（或 Formik）+ **Zod**（类型与校验与 `templates/rules/typescript.md` 一致）。
+- 避免单组件内巨型 `useState` 表单对象与重复校验逻辑，可拆字段子组件或抽 `useFormSchema`。
+
+### Error Boundary
+
+- **不要**在业务代码中手写 React **类组件**形式的 Error Boundary；统一使用 **`react-error-boundary`**（或团队认可的同类库）在**模块边界**兜底渲染失败（与本章「错误处理」、`error-handling.md` 一致）。
+- 用 `FallbackComponent` 与 `resetErrorBoundary` 提供「重试」；**日志上报**放在库的 **`onError`**（等回调）中，生产代码避免长期依赖 `console.log`（见 TypeScript 规则）。
+
+### 性能（与「性能优化」一节配合）
+
+- **useMemo**：昂贵派生、大列表排序/过滤；注意不可变数据，例如 `useMemo(() => [...list].sort(...), [list])`，避免直接 `sort` 可变原数组。
+- **useCallback**：传给 **`React.memo`** 子组件或作为其他 Hook 依赖的回调，在确有稳定引用需求时使用。
+- **React.memo**：纯展示、props 浅比较可接受的组件；不要全局套 memo。
+- **虚拟列表**：超长列表用 **TanStack Virtual**、**react-window** 等，只渲染视区内节点（路由级与组件级懒加载仍见「Suspense 与懒加载」）。
+
+### 动画与过渡
+
+- 列表进出场可用 **Framer Motion** 的 `AnimatePresence` + `key`，或 CSS `transition`；注意减少布局抖动与 `prefers-reduced-motion`（与无障碍策略一致时）。
+
+### 无障碍与焦点
+
+- 自定义下拉、标签页等：**`role` / `aria-*`**、**方向键 / Enter / Escape** 行为与焦点环可见。
+- 弹窗：打开时将焦点移入对话框，关闭时**恢复**触发元素焦点；可用 **`focus-trap-react`** 或类似方案，与 `accessibility-check` skill 互补。
+
+### Next.js 与服务端组件
+
+- **App Router、Server Components、服务端数据获取与缓存**见 **`nextjs-project-standard`**；客户端交互模式仍以本章与 Hooks 规范为准。
 
 ---
 
@@ -438,12 +498,33 @@ export function updateUser(id: string, data: UpdateUserDTO): Promise<User> {
 - 重要操作提供重试能力
 - 不要吞错，不写空 `catch`
 
-### 示例
+### 示例（`react-error-boundary`，函数式 Fallback）
 
 ```tsx
-<ErrorBoundary fallback={<ModuleErrorFallback />}>
-  <UserDashboard />
-</ErrorBoundary>
+import { ErrorBoundary } from "react-error-boundary";
+
+function ModuleErrorFallback({
+  resetErrorBoundary,
+}: {
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <div>
+      模块加载失败
+      <button type="button" onClick={resetErrorBoundary}>
+        重试
+      </button>
+    </div>
+  );
+}
+
+export function UserDashboardSection() {
+  return (
+    <ErrorBoundary FallbackComponent={ModuleErrorFallback}>
+      <UserDashboard />
+    </ErrorBoundary>
+  );
+}
 ```
 
 ---
@@ -493,13 +574,28 @@ function Dashboard() {
 
 ---
 
+## 注释规范
+
+- **优先使用中文**：解释「为什么这样做」、业务约束、边界情况、非显而易见的权衡时，优先用中文撰写注释，便于团队与业务方阅读。
+- **与代码语言一致时的例外**：对接第三方协议字段名、HTTP 头、规范中的英文术语时，注释里可保留英文专有名词，必要时中英文并列说明。
+- **少而精**：能通过清晰命名与类型表达清楚的逻辑不写废话注释；复杂分支、临时兼容、性能取舍必须写清意图。
+- **公开 API**：模块或 hooks 的对外契约可用 JSDoc（`@param` / `@returns` / `@example`），说明用中文即可，除非仓库统一要求英文。
+
+---
+
 ## TypeScript 规范
+
+通用 TypeScript / JavaScript 约定（类型与接口、`any`/`unknown`、React Props、不可变更新、错误处理、Zod、模式与安全等）见插件模板 **`templates/rules/typescript.md`**（初始化到项目后为 `.claude/rules/typescript.md`）。
+
+- **函数签名**：参数上的复杂联合、内联对象、冗长回调应优先抽成具名类型（见同文件「函数参数：复杂类型宜具名」）。
+
+### React 项目补充约定
 
 - Props interface 命名: `ComponentNameProps`
 - 事件处理函数: `handle` 前缀（如 `handleClick`）
 - 回调 Props: `on` 前缀（如 `onChange`、`onSubmit`）
-- 禁止使用 `any`，优先使用 `unknown` 或精确类型
-- 泛型组件使用 `<T>` 约束，保持类型推导
+- 组件优先写显式 props 与返回值类型（`JSX.Element` / `React.ReactElement`），避免依赖 `React.FC` 的隐式 `children` 等行为差异
+- 泛型组件使用 `<T>` 约束，保持调用处类型推导；回调与事件类型优先使用 DOM / React 自带类型（如 `React.ChangeEvent<HTMLInputElement>`）
 
 ```tsx
 interface TableProps<T extends Record<string, unknown>> {
@@ -586,6 +682,7 @@ describe("UserForm", () => {
 - 在 `components/` 中放业务耦合组件
 - 直接绕过模块出口，从 feature 深层路径导入
 - 没有明显收益却提前做复杂优化
+- **新增类组件**或手写类式 Error Boundary（应函数组件 + `react-error-boundary` 等）
 
 ---
 
@@ -597,14 +694,17 @@ describe("UserForm", () => {
 - [ ] 页面 / feature / 通用组件边界是否清晰
 - [ ] 目录结构是否与模块复杂度匹配
 - [ ] Props 类型完整且明确
+- [ ] 解释性注释是否优先使用中文且点到要害
 - [ ] 可复用逻辑是否已提取为 hooks
 - [ ] loading / error / empty / data 状态是否齐全
 - [ ] API 层是否具备类型约束和统一错误处理
+- [ ] 是否避免滥用 `any`，外部/接口数据是否在边界收窄或校验
 - [ ] 状态管理是否符合就近原则
 - [ ] 路由级或重型模块是否考虑懒加载
 - [ ] 样式方案是否与仓库保持一致
 - [ ] 关键行为是否有测试覆盖
-- [ ] Error Boundary 已包裹关键模块
+- [ ] 关键模块已用 **`react-error-boundary`**（等）包裹，且未手写类组件式 Boundary
+- [ ] 超长列表是否评估虚拟化；弹窗/复合组件是否具备键盘与焦点约定
 - [ ] 是否引入了不必要的新依赖或新范式
 
 ---

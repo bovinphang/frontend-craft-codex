@@ -51,12 +51,16 @@
 
 使用 Playwright 或 Cypress 时：
 
-- 遵循 Page Object 模式，测试用例不直接写选择器
-- 选择器优先使用 `data-testid`，其次 `role`、`label`
-- 避免固定等待（`setTimeout`），使用 `waitFor`、`expect` 等断言
-- 关键流程至少覆盖桌面、平板、移动端视口
-- 用例可独立运行，不依赖执行顺序
-- 失败时保留截图、Trace、视频，便于排查
+- 遵循 **Page Object**，spec 内不写裸选择器；优先 **`data-testid`**，其次 **`role` / `label`**
+- 用 **`test.describe` + `beforeEach`** 组织场景，单用例可独立运行、不依赖执行顺序
+- 禁止用固定 **`sleep`** 当主要同步手段；用 **Locator 自动等待**、`expect`、`waitForResponse` 等
+- Playwright：**`playwright.config.ts`** 中配置 `baseURL`、CI 下 `retries`/`workers`、`trace`/`screenshot`/`video`、**`webServer`** 与多 **`projects`（含移动端）**
+- 关键流程至少覆盖桌面、平板、移动端视口（或等价 device 项目）
+- **不稳定用例**：`test.fixme` / `test.skip` 需写原因与 issue；用 `--repeat-each` 辅助定位 flaky
+- 失败时保留 **截图、Trace、视频**，CI 用 **artifact** 上传 HTML 报告与产物
+- 高风险/资金类流程：**勿在生产跑真实 E2E**；staging 或 mock，必要时 `test.skip`
+
+详细模式与示例见插件 **`e2e-testing`** skill。
 
 ## 重构规则
 

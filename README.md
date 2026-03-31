@@ -78,7 +78,7 @@ Use frontend-architect to analyze component architecture
 Use performance-optimizer for performance analysis
 ```
 
-✨ **Done!** You now have access to 5 custom agents, 16 skills.
+✨ **Done!** You now have access to 9 custom agents, 16 skills.
 
 ---
 
@@ -137,12 +137,16 @@ frontend-craft-codex/
 │   ├── nuxt-project-standard/   # Nuxt 3 SSR/SSG
 │   └── monorepo-project-standard/
 │
-├── .codex/agents/           # Custom subagents (5 total)
-│   ├── frontend-architect.toml   # Page splitting, component architecture
+├── .codex/agents/           # Custom subagents (9 total)
+│   ├── frontend-architect.toml    # Page splitting, component architecture
 │   ├── performance-optimizer.toml # Performance bottleneck analysis
-│   ├── ui-checker.toml           # UI visual issues, design fidelity
-│   ├── figma-implementer.toml    # Precise UI implementation from design
-│   └── design-token-mapper.toml  # Map design variables to Tokens
+│   ├── ui-checker.toml            # UI visual issues, design fidelity
+│   ├── figma-implementer.toml     # Precise UI implementation from design
+│   ├── design-token-mapper.toml   # Map design variables to Tokens
+│   ├── frontend-code-reviewer.toml # Frontend code review (CRITICAL→LOW)
+│   ├── frontend-security-reviewer.toml # Browser-side security review
+│   ├── frontend-e2e-runner.toml   # Playwright / E2E journeys
+│   └── typescript-reviewer.toml   # TS/JS language & type review
 │
 └── scripts/                 # Optional: manual integration
     ├── security-check.mjs   # Block dangerous commands
@@ -186,6 +190,10 @@ frontend-craft-codex/
 | `ui-checker` | UI visual issues, design fidelity evaluation | `ui-fidelity-review-*.md` |
 | `figma-implementer` | Precise UI implementation from design files | `design-implementation-*.md` |
 | `design-token-mapper` | Map design variables to project Design Tokens | `token-mapping-*.md` |
+| `frontend-code-reviewer` | Frontend code review (React/Vue/Next/Nuxt, a11y, client security) | `code-review-*.md` |
+| `frontend-security-reviewer` | XSS, secrets in bundle, dangerous DOM/API, dependency risks | `security-review-*.md` |
+| `frontend-e2e-runner` | E2E journeys, Playwright/Cypress, flaky governance | `e2e-summary-*.md` (optional) |
+| `typescript-reviewer` | TypeScript/JavaScript: types, async, security; typecheck-first | `typescript-review-*.md` |
 
 Invoke subagents explicitly in your prompt, e.g.:
 
@@ -213,6 +221,7 @@ Use frontend-architect to analyze the component architecture for this page
 | `.codex/rules/code-comments.md` | Frontend code comment guidelines |
 | `.codex/rules/ci-cd.md` | CI/CD pipeline |
 | `.codex/rules/refactoring.md` | Refactoring constraints |
+| `.codex/rules/typescript.md` | TypeScript/JavaScript standards; pairs with `typescript-reviewer` |
 
 ---
 

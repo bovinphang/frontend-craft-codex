@@ -67,7 +67,7 @@ frontend-architect로 컴포넌트 아키텍처 분석
 performance-optimizer로 성능 분석
 ```
 
-✨ **완료!** 5개의 커스텀 에이전트, 16개의 skills를 사용할 수 있습니다.
+✨ **완료!** 9개의 커스텀 에이전트, 16개의 skills를 사용할 수 있습니다.
 
 ---
 
@@ -109,7 +109,7 @@ npx skills update
 ```
 frontend-craft-codex/
 ├── .agents/skills/     # Codex Skills (16개)
-├── .codex/agents/     # 커스텀 서브에이전트 (5개)
+├── .codex/agents/     # 커스텀 서브에이전트 (9개)
 └── scripts/           # 선택: 수동 통합 스크립트
 ```
 
@@ -140,6 +140,10 @@ frontend-craft-codex/
 | `ui-checker` | UI 충실도 검사 |
 | `figma-implementer` | 디자인 구현 |
 | `design-token-mapper` | Token 매핑 |
+| `frontend-code-reviewer` | 프론트엔드 코드 리뷰 |
+| `frontend-security-reviewer` | 브라우저 보안 리뷰 |
+| `frontend-e2e-runner` | E2E / Playwright |
+| `typescript-reviewer` | TypeScript / JavaScript 리뷰 |
 
 ---
 

@@ -67,7 +67,7 @@ cp -r .frontend-craft/.codex/agents/* ~/.codex/agents/
 使用 performance-optimizer 進行效能分析
 ```
 
-✨ **完成！** 您現在可使用 5 個自訂子代理、16 個 skills。
+✨ **完成！** 您現在可使用 9 個自訂子代理、16 個 skills。
 
 ---
 
@@ -109,7 +109,7 @@ npx skills update
 ```
 frontend-craft-codex/
 ├── .agents/skills/     # Codex Skills（16 個）
-├── .codex/agents/     # 自訂子代理（5 個）
+├── .codex/agents/     # 自訂子代理（9 個）
 └── scripts/           # 可選手動整合腳本
 ```
 
@@ -140,6 +140,10 @@ frontend-craft-codex/
 | `ui-checker` | UI 還原度檢查 |
 | `figma-implementer` | 設計稿實作 |
 | `design-token-mapper` | Token 對應 |
+| `frontend-code-reviewer` | 前端程式碼審查 |
+| `frontend-security-reviewer` | 瀏覽器端安全審查 |
+| `frontend-e2e-runner` | E2E / Playwright |
+| `typescript-reviewer` | TypeScript / JavaScript 審查 |
 
 ---
 

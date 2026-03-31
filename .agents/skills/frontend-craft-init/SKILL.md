@@ -33,6 +33,7 @@ description: 将 frontend-craft 的项目模板（AGENTS.md、config.toml、rule
    - `templates/rules/code-comments.md` → `.codex/rules/code-comments.md`
    - `templates/rules/ci-cd.md` → `.codex/rules/ci-cd.md`
    - `templates/rules/refactoring.md` → `.codex/rules/refactoring.md`
+   - `templates/rules/typescript.md` → `.codex/rules/typescript.md`
 
 4. 复制时需确定本 skill 的 templates 路径。若项目通过 git submodule 安装 frontend-craft-codex 于 `.frontend-craft/`，则模板路径为 `.frontend-craft/.agents/skills/frontend-craft-init/templates/`。若 skills 直接位于 `.agents/skills/`，则路径为 `.agents/skills/frontend-craft-init/templates/`。
 

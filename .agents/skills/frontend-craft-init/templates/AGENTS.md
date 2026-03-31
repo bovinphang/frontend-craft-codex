@@ -88,6 +88,7 @@
 项目详细规则位于 `.codex/rules/` 目录，按技术栈选择性参考：
 
 - vue.md / react.md - 框架组件规范
+- typescript.md - TypeScript/JavaScript 规范（与 `typescript-reviewer` 子代理联动）
 - design-system.md - 设计系统与 Token
 - testing.md - 测试规范
 - git-conventions.md - Git 提交规范

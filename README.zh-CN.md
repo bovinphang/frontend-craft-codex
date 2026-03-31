@@ -78,7 +78,7 @@ cp -r .frontend-craft/.codex/agents/* ~/.codex/agents/
 使用 performance-optimizer 进行性能分析
 ```
 
-✨ **完成！** 你现在可以使用 5 个自定义子代理、16 个 skills。
+✨ **完成！** 你现在可以使用 9 个自定义子代理、16 个 skills。
 
 ---
 
@@ -137,12 +137,16 @@ frontend-craft-codex/
 │   ├── nuxt-project-standard/   # Nuxt 3 SSR/SSG
 │   └── monorepo-project-standard/
 │
-├── .codex/agents/           # 自定义子代理（5 个）
-│   ├── frontend-architect.toml   # 架构设计
+├── .codex/agents/           # 自定义子代理（9 个）
+│   ├── frontend-architect.toml    # 架构设计
 │   ├── performance-optimizer.toml # 性能优化
-│   ├── ui-checker.toml           # UI 还原度检查
-│   ├── figma-implementer.toml    # 设计稿实现
-│   └── design-token-mapper.toml  # Token 映射
+│   ├── ui-checker.toml            # UI 还原度检查
+│   ├── figma-implementer.toml     # 设计稿实现
+│   ├── design-token-mapper.toml   # Token 映射
+│   ├── frontend-code-reviewer.toml # 前端代码评审（CRITICAL→LOW）
+│   ├── frontend-security-reviewer.toml # 浏览器侧安全评审
+│   ├── frontend-e2e-runner.toml   # Playwright / E2E
+│   └── typescript-reviewer.toml   # TS/JS 语言与类型评审
 │
 └── scripts/                 # 可选：手动集成
     ├── security-check.mjs   # 危险命令检查
@@ -186,6 +190,10 @@ frontend-craft-codex/
 | `ui-checker` | UI 视觉问题、设计还原度评估 | `ui-fidelity-review-*.md` |
 | `figma-implementer` | 设计稿精确实现 | `design-implementation-*.md` |
 | `design-token-mapper` | 设计变量映射到 Token | `token-mapping-*.md` |
+| `frontend-code-reviewer` | 前端代码评审（React/Vue/Next/Nuxt、可访问性、客户端安全） | `code-review-*.md` |
+| `frontend-security-reviewer` | XSS、密钥进 bundle、危险 DOM/API、依赖风险 | `security-review-*.md` |
+| `frontend-e2e-runner` | E2E 旅程、Playwright/Cypress、不稳定用例治理 | `e2e-summary-*.md`（可选） |
+| `typescript-reviewer` | TypeScript/JavaScript：类型、异步、安全；先 typecheck | `typescript-review-*.md` |
 
 在提示词中显式调用子代理，例如：
 
@@ -213,6 +221,7 @@ frontend-craft-codex/
 | `.codex/rules/code-comments.md` | 前端代码注释规范 |
 | `.codex/rules/ci-cd.md` | CI/CD 流水线 |
 | `.codex/rules/refactoring.md` | 重构约束 |
+| `.codex/rules/typescript.md` | TypeScript/JavaScript 规范；与 `typescript-reviewer` 联动 |
 
 ---
 

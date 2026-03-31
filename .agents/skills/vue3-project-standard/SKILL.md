@@ -129,7 +129,7 @@ src/
 - 可复用逻辑优先提取到 composables
 - 保持 template 可读，避免过深条件嵌套
 - 优先使用计算属性，而不是重复维护状态
-- 避免构建大型单体组件
+- 避免构建大型单体组件；**单文件规模**见 `templates/rules/vue.md`「**组件文件规模**」（约 300 行内为佳，逾 500 行或复杂度过高拆子组件与 Composables）
 - 优先使用强类型的 props、emits 和暴露方法
 - 遵循仓库的文件与目录命名规范
 - 优先复用现有 UI 组件和 Token
@@ -143,7 +143,18 @@ src/
             └── 通用组件 (UI)   → 纯展示，无业务耦合
 ```
 
+## 注释规范
+
+- **优先使用中文**：解释「为什么这样做」、业务约束、边界情况、非显而易见的权衡时，优先用中文撰写注释，便于团队与业务方阅读。
+- **与代码语言一致时的例外**：对接第三方协议字段名、HTTP 头、规范中的英文术语时，注释里可保留英文专有名词，必要时中英文并列说明。
+- **少而精**：能通过清晰命名与类型表达清楚的逻辑不写废话注释；复杂分支、临时兼容、性能取舍必须写清意图。
+- **公开 API**：composable 或模块的对外契约可用 JSDoc（`@param` / `@returns` / `@example`），说明用中文即可，除非仓库统一要求英文。
+
 ## TypeScript 规范
+
+通用 TypeScript / JavaScript 约定见插件模板 **`templates/rules/typescript.md`**（初始化到项目后为 `.claude/rules/typescript.md`）。
+
+### Vue 3 项目补充约定
 
 ```vue
 <script setup lang="ts">
@@ -501,6 +512,7 @@ describe('authStore', () => {
 - [ ] 文件结构与项目约定一致（pages / features / components 分离）
 - [ ] 使用 `<script setup lang="ts">`
 - [ ] Props / Emits 类型完整
+- [ ] 解释性注释是否优先使用中文且点到要害
 - [ ] 可复用逻辑已提取到 composable
 - [ ] Loading / Error / Empty 状态均已处理
 - [ ] 路由组件使用动态 import 加载
